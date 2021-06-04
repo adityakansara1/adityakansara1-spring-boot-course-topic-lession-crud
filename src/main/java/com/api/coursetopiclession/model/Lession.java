@@ -1,12 +1,9 @@
 package com.api.coursetopiclession.model;
 
-import org.springframework.context.annotation.Lazy;
-
 import javax.persistence.*;
 
 @Entity
-public class Topic {
-
+public class Lession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,32 +11,18 @@ public class Topic {
     private String description;
     private int ref_id;
     @ManyToOne
+    private Topic topic;
+    @ManyToOne
     private Course course;
 
-    public int getRef_id() {
-        return ref_id;
+    public Lession() {
     }
 
-    public void setRef_id(int ref_id) {
-        this.ref_id = ref_id;
-    }
-
-
-    public Topic() {
-    }
-
-    public Topic(int id, String name, String description,int ref_id, Course course) {
+    public Lession(int id, String name, String description, Topic topic, Course course) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.ref_id = ref_id;
-        this.course = course;
-    }
-
-    public Topic(int id,String name, String description, Course course) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+        this.topic = topic;
         this.course = course;
     }
 
@@ -67,11 +50,27 @@ public class Topic {
         this.description = description;
     }
 
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
     public Course getCourse() {
         return course;
     }
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public int getRef_id() {
+        return ref_id;
+    }
+
+    public void setRef_id(int ref_id) {
+        this.ref_id = ref_id;
     }
 }
